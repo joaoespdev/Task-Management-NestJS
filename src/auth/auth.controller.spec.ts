@@ -1,6 +1,7 @@
 import { Test } from '@nestjs/testing';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
+import { AuthResponseDto } from './auth.dto';
 
 describe('AuthController', () => {
   let authController: AuthController;
@@ -13,8 +14,7 @@ describe('AuthController', () => {
         {
           provide: AuthService,
           useValue: {
-            register: jest.fn(),
-            login: jest.fn(),
+            signIn: jest.fn(),
           },
         },
       ],
@@ -27,5 +27,20 @@ describe('AuthController', () => {
   it('should be defined', () => {
     expect(authController).toBeDefined();
     expect(authService).toBeDefined();
+  });
+
+  describe('signIn', () => {
+    it('should return a valid token and expiration time on successful login', () => {
+      const mockAuthResponse: AuthResponseDto = {
+        token: 'mocked-jwt-token',
+        expiresIn: 3600,
+      };
+
+      jest.spyOn(authService, 'signIn').mockReturnValue(mockAuthResponse);
+
+      const result = authController.signIn('testUser', 'testPassword');
+
+      expect(result).toEqual(mockAuthResponse);
+    });
   });
 });
