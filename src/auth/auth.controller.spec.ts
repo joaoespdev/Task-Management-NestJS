@@ -1,6 +1,6 @@
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
-import { UsersService } from '../users/users.service';
+//import { UsersService } from '../users/users.service';
 import { AuthResponseDto } from './auth.dto';
 import { TestingModule } from '@nestjs/testing';
 
