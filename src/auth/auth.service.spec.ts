@@ -47,7 +47,7 @@ describe('AuthService', () => {
     const mockUser = {
       id: '1',
       username: 'testUser',
-      password: '$2b$10$hashedpassword', // senha "123456" hash fictício
+      password: '$2b$10$hashedpassword',
     };
 
     jest.spyOn(usersService, 'findByUserName').mockReturnValue(mockUser);

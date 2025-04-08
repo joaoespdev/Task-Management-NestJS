@@ -18,7 +18,6 @@ describe('TaskService', () => {
   });
 
   afterEach(() => {
-    // limpa o array interno entre os testes
     (service as any).tasks = [];
   });
 

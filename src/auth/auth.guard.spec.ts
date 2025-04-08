@@ -33,7 +33,6 @@ describe('AuthGuard', () => {
     jwtService = moduleRef.get<JwtService>(JwtService);
     configService = moduleRef.get<ConfigService>(ConfigService);
 
-    // Forçando a atribuição manual do secret, já que o constructor original está incorreto
     (authGuard as any).jwtSecret = 'mocked-secret';
   });
 
