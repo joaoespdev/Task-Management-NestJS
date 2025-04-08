@@ -2,6 +2,7 @@ import { Test } from '@nestjs/testing';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { AuthResponseDto } from './auth.dto';
+import { UnauthorizedException } from '@nestjs/common';
 
 describe('AuthController', () => {
   let authController: AuthController;
@@ -24,13 +25,13 @@ describe('AuthController', () => {
     authService = moduleRef.get<AuthService>(AuthService);
   });
 
-  it('should be defined', () => {
+  it('deve definir as instâncias', () => {
     expect(authController).toBeDefined();
     expect(authService).toBeDefined();
   });
 
   describe('signIn', () => {
-    it('should return a valid token and expiration time on successful login', () => {
+    it('deve definir um token válido e o tempo em que expira caso o login seja feito', () => {
       const mockAuthResponse: AuthResponseDto = {
         token: 'mocked-jwt-token',
         expiresIn: 3600,
@@ -41,6 +42,16 @@ describe('AuthController', () => {
       const result = authController.signIn('testUser', 'testPassword');
 
       expect(result).toEqual(mockAuthResponse);
+    });
+
+    it('deve lançar UnauthorizedException quando as credenciais são inválidas', () => {
+      jest.spyOn(authService, 'signIn').mockImplementation(() => {
+        throw new UnauthorizedException();
+      });
+
+      expect(() => authController.signIn('wrongUser', 'wrongPassword')).toThrow(
+        UnauthorizedException,
+      );
     });
   });
 });
