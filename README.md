@@ -6,8 +6,7 @@ API RESTful desenvolvida com NestJS para gerenciamento de tarefas com autentica�
 ## 🚀 Funcionalidades
 
 ### Autenticação
-- [x] Cadastro de usuários
-- [x] Login com geração de token JWT
+- [x] Geração de token JWT
 - [x] Proteção de rotas com guard de autenticação
 
 ### Tarefas
@@ -109,3 +108,4 @@ ou
 
 npm test nomedaclasse.spec.ts
 ```
+
